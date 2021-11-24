@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Asistente creación procesos</title>
+    <script src="libs/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <script src="../node_modules/nouislider/dist/nouislider.js"></script>
+    <link rel="stylesheet" href="../node_modules/nouislider/dist/nouislider.css">
+    <link rel="stylesheet" href="libs/materialize.min.css">
+    <link rel="stylesheet" href="libs/asistente.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="libs/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="row">
+    <div class="col s12" id="title">
+        <h4>Asignación Laboratorio FIV</h4>
+    </div>
+    <div class="col s4">
+        <!--
+        <input type="number" placeholder="progesterona" id="tentacles" name="tentacles"  min="10" max="100">
+                <label for="tentacles">tentacles Name</label>
+                <div id="test-slider"></div>
+                --->
+
+        <h6>Medicación Paciente</h6>
+
+        <div class="input-field col s12">
+            <div class="input-field col s12">
+                <input id="menopur" type="number" class="validate" onchange="moveSlider2()">
+                <label for="menopur">Menopur</label>
+                <span class="helper-text" data-error="wrong" data-success="Estimulación">Estimulación</span>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <div class="input-field col s12">
+                <input id="lutea" type="number" class="validate" value="5" onchange=moveSlider2()>
+                <label for="lutea">Utrogestán</label>
+                <span class="helper-text" data-error="wrong" data-success="Estimulación">Fase Lutea</span>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+
+            <div id="slider"></div>
+            <div id="slider-value">Utrogestán</div>
+        </div>
+    </div>
+    <div class="col s8" id="carousel">
+
+        <h6>Fechas recomendadas quirófano</h6>
+        <div class="carousel">
+            <a class="carousel-item" href="#one!" onclick="reserva()">
+                <div class="card-date bad-option">
+                    <div class="card-date-body">
+                        <strong>11/12/2021</strong>
+                    </div>
+                    <div class="card-date-footer">
+                        Punciones: 24
+                        <br>
+                        Transfers: 10
+                    </div>
+
+                </div>
+            </a>
+            <a class="carousel-item" href="#two!" onclick="reserva()">
+                <div class="card-date normal-option" >
+                    <div class="card-date-body">
+                        <strong>12/12/2021</strong>
+                    </div>
+                    <div class="card-date-footer">
+                        Punciones: 15
+                        <br>
+                        Transfers: 5
+                    </div>
+
+
+                </div>
+
+            </a>
+            <a class="carousel-item active" href="#three!" onclick="reserva()">
+                <div class="card-date good-option">
+                    <div class="card-date-body">
+                        <strong>13/12/2021</strong>
+                    </div>
+                    <div class="card-date-footer">
+                        Punciones: 10
+                        <br>
+                        Transfers: 2
+                    </div>
+
+                </div>
+
+
+            </a>
+            <a class="carousel-item" href="#four!" onclick="reserva()">
+                <div class="card-date best-option">
+                    <div class="card-date-body ">
+                        <strong>14/12/2021</strong>
+                    </div>
+                    <div class="card-date-footer">
+                        Punciones: 5
+                        <br>
+                        Transfers: 1
+                    </div>
+                </div>
+
+            </a>
+            <a class="carousel-item" href="#five!"  onclick="reserva()">
+                <div class="card-date good-option">
+                    <div class="card-date-body ">
+                        <strong>15/12/2000</strong>
+                    </div>
+                    <div class="card-date-footer">
+                        Punciones: 10
+                        <br>
+                        Transfers: 5
+                    </div>
+                </div>
+
+            </a>
+            <a class="carousel-item" href="#five!"  onclick="reserva()">
+                <div class="card-date bad-option">
+                    <div class="card-date-body">
+                        <strong>16/12/2000</strong>
+                    </div>
+                    <div class="card-date-footer">
+                        Punciones: 24
+                        <br>
+                        Transfers: 10
+                    </div>
+                </div>
+
+            </a>
+
+        </div>
+
+        <div class="legend">
+            <span class="dot best-option"></span> Mejor opción
+            <span class="dot good-option"></span> Buena opción
+            <span class="dot normal-option"></span> Opción correcta
+            <span class="dot bad-option"></span> Opción no recomendada
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<br>
+<hr>
+
+</body>
+</html>
+<script>
+
+
+    var elem2 = document.querySelector('.carousel');
+    var opto = {
+        indicators: true,
+        noWrap: true,
+        dist: -25,
+        shift: 5,
+        onCycleTo: function () {
+            console.log('callme');
+            document.querySelector('#lutea').value =5;
+           // if (slider){
+           // slider.noUiSlider.set(6);
+           // }
+        }
+    };
+    var instance2 = M.Carousel.init(elem2, opto);
+    instance2.set(3);
+
+    function callme() {
+        console.log('callme');
+
+    }
+
+    function moveSlider1() {
+        console.log('slide1');
+    }
+
+    var item = 3
+
+    function moveSlider2() {
+        console.log('slide2');
+        console.log(instance2);
+        if (item <= document.querySelector('#lutea').value) {
+            instance2.next();
+        } else {
+            instance2.prev();
+        }
+        item = document.querySelector('#lutea').value;
+
+    }
+
+
+    var slider = document.getElementById('slider');
+    var slidervalue = document.getElementById('slider-value');
+
+
+    noUiSlider.create(slider, {
+        start: [5],
+        connect: true,
+        tooltips: [ true],
+        range: {
+            'min': 1,
+            'max': 15
+        }
+    });
+
+    slider.noUiSlider.on('update', function (values) {
+        console.log('slider updete')
+       item = values;
+        if (item <= document.querySelector('#lutea').value) {
+            instance2.next();
+        } else {
+            instance2.prev();
+        }
+    });
+
+    function  reserva(){
+        console.log('reserva');
+        M.toast({html: 'Resevado quirófano'})
+
+
+    }
+</script>
+<style>
+
+
+    .dot {
+        height: 10px;
+        width: 10px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .indicator-item.active {
+        background: #18988b !important;
+    }
+
+    .indicator-item {
+        background: #b6e6e2 !important;
+    }
+
+    .card-date {
+        width: 200px;
+        height: 200px;
+    }
+
+    .card-date .card-date-body {
+        color: black;
+        height: 75%;
+        text-align: center;
+        padding-top: 70px;
+        font-size: xx-large;
+    }
+
+    .good-option {
+        border: solid 1px #a9d5bf;
+
+    }
+
+    .good-option div.card-date-body, .dot.good-option {
+        background: #a9d5bf;
+    }
+
+
+    .best-option {
+        border: solid 1px #18988b;
+    }
+
+    .best-option div.card-date-body, .dot.best-option {
+        background: #18988b;
+
+    }
+
+    .normal-option div.card-date-body, .dot.normal-option {
+        background: orange;
+    }
+
+    .normal-option {
+        border: solid 1px orange;
+    }
+
+    .normal-option div.card-date-body {
+        background: orange;
+    }
+
+    .bad-option {
+        border: solid 1px #d84848;
+    }
+
+    .bad-option div.card-date-body, .dot.bad-option {
+        background: #d84848;
+    }
+
+    .card-date .card-date-footer {
+        background: whitesmoke;
+        height: 25%;
+        padding:5px;
+        color:black;
+    }
+
+    h4{
+        color: #3776af;
+    }
+
+</style>
